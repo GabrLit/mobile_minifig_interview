@@ -15,6 +15,7 @@ interface MinifigFlatlistProps {
   data: minifigDataType[];
   selectedMinifig: minifigDataType;
   onSelection: (item: minifigDataType) => void;
+  onShowDetails: (url: string) => void;
 }
 
 const MinifigFlatlist = ({
@@ -22,6 +23,7 @@ const MinifigFlatlist = ({
   data,
   selectedMinifig,
   onSelection,
+  onShowDetails,
 }: MinifigFlatlistProps) => {
   const { width } = useDimensions();
 
@@ -46,6 +48,7 @@ const MinifigFlatlist = ({
             isLastElement={data.length - 1 === index}
             firstAndLastElementMargin={width * 0.1}
             onPress={onSelection}
+            onShowDetails={onShowDetails}
           />
         )}
         ItemSeparatorComponent={Separator}

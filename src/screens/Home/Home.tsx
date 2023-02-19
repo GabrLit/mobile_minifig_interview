@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import {
   selectMinifigSlice,
@@ -8,6 +8,8 @@ import { HomeView } from "./HomeView";
 import { minifigDataType } from "../../types/minifigs";
 
 const Home = ({ navigation }) => {
+  const [webViewUrl, setWebViewUrl] = useState<string | null>(null);
+
   const dispatch = useAppDispatch();
 
   const { data, loading, selectedMinifig, minifigsToDisplay } =
@@ -25,6 +27,9 @@ const Home = ({ navigation }) => {
     <HomeView
       flatlistData={minifigsToDisplay}
       selectedMinifig={selectedMinifig}
+      webViewUrl={webViewUrl}
+      openWebView={(url: string) => setWebViewUrl(url)}
+      onWebViewClose={() => setWebViewUrl(null)}
       onChooseBtnPress={handleNextScreen}
       onSelection={handleSelectionChange}
     />

@@ -4,10 +4,14 @@ import { placeholders } from "../../placeholders";
 import MinifigFlatlist from "../../components/MinifigFlatlist";
 import { containers, fonts } from "../../styles";
 import { minifigDataType } from "../../types/minifigs";
+import WebViewModal from "../../components/WebViewModal";
 
 interface HomeViewProps {
   flatlistData: minifigDataType[];
   selectedMinifig: minifigDataType;
+  webViewUrl: string | null;
+  openWebView: (url: string) => void;
+  onWebViewClose: () => void;
   onChooseBtnPress: () => void;
   onSelection: (item: minifigDataType) => void;
 }
@@ -15,11 +19,16 @@ interface HomeViewProps {
 export const HomeView = ({
   flatlistData,
   selectedMinifig,
+  webViewUrl,
+  openWebView,
+  onWebViewClose,
   onChooseBtnPress,
   onSelection,
 }: HomeViewProps) => {
   return (
     <View style={styles.background}>
+      <WebViewModal url={webViewUrl} onClose={onWebViewClose} />
+
       <View style={styles.container}>
         <Text style={styles.title}>{placeholders.home.title}</Text>
         <MinifigFlatlist
@@ -27,6 +36,7 @@ export const HomeView = ({
           data={flatlistData}
           selectedMinifig={selectedMinifig}
           onSelection={onSelection}
+          onShowDetails={openWebView}
         />
         <TouchableOpacity
           style={[

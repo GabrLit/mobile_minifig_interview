@@ -19,6 +19,7 @@ interface MinifigCardProps {
   isLastElement: boolean;
   firstAndLastElementMargin: number;
   onPress: (item: minifigDataType) => void;
+  onShowDetails: (url: string) => void;
 }
 
 const MinifigCard = ({
@@ -29,6 +30,7 @@ const MinifigCard = ({
   isLastElement,
   firstAndLastElementMargin,
   onPress,
+  onShowDetails,
 }: MinifigCardProps) => {
   return (
     <Pressable
@@ -53,7 +55,10 @@ const MinifigCard = ({
       </View>
       <View style={styles.detailsBox}>
         <Text style={styles.nameTextBox}>{item.name}</Text>
-        <TouchableOpacity style={styles.showDetailsBtn}>
+        <TouchableOpacity
+          style={styles.showDetailsBtn}
+          onPress={() => onShowDetails(item.set_url)}
+        >
           <Text style={styles.showDetailsBtnText}>
             {placeholders.home.showDetails}
           </Text>
