@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import useFetchInitialData from "../hooks/useFetchInitialData";
-import DetailsForm from "../screens/DetailsForm";
+import Details from "../screens/Details/Details";
 import Home from "../screens/Home/Home";
 
 export default function Navigation() {
@@ -24,9 +24,9 @@ function RootNavigator() {
         component={Home}
       />
       <Stack.Screen
-        name="DetailsForm"
+        name="Details"
         options={{ headerShown: false }}
-        component={DetailsForm}
+        component={Details}
       />
     </Stack.Navigator>
   );

@@ -7,4 +7,5 @@ export const placeholders = {
     button: "Choose figure",
     showDetails: "Show Details",
   },
+  detailsForm: { title: "PERSONAL DETAILS", button: "View Summary" },
 };

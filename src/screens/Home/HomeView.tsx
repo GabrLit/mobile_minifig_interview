@@ -1,10 +1,11 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { placeholders } from "../../placeholders";
 import MinifigFlatlist from "../../components/MinifigFlatlist";
 import { containers, fonts } from "../../styles";
 import { minifigDataType } from "../../types/minifigs";
 import WebViewModal from "../../components/WebViewModal";
+import CustomButton from "../../components/CustomButton";
 
 interface HomeViewProps {
   flatlistData: minifigDataType[];
@@ -38,16 +39,11 @@ export const HomeView = ({
           onSelection={onSelection}
           onShowDetails={openWebView}
         />
-        <TouchableOpacity
-          style={[
-            styles.buttonContainer,
-            !selectedMinifig && styles.buttonContainerDisabled,
-          ]}
+        <CustomButton
           disabled={!selectedMinifig}
-          onPress={() => selectedMinifig && onChooseBtnPress()}
-        >
-          <Text style={styles.buttonText}>{placeholders.home.button}</Text>
-        </TouchableOpacity>
+          text={placeholders.home.button}
+          onPress={onChooseBtnPress}
+        />
       </View>
     </View>
   );
@@ -60,15 +56,6 @@ const styles = StyleSheet.create({
   },
   title: {
     ...fonts.h1,
-  },
-  buttonContainer: {
-    ...containers.standardButton,
-  },
-  buttonText: {
-    ...fonts.h2,
-  },
-  buttonContainerDisabled: {
-    opacity: 0.3,
   },
   flatListWrapper: {
     width: "100%",

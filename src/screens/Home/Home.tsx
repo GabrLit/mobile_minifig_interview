@@ -8,20 +8,16 @@ import { HomeView } from "./HomeView";
 import { minifigDataType } from "../../types/minifigs";
 
 const Home = ({ navigation }) => {
+  const dispatch = useAppDispatch();
   const [webViewUrl, setWebViewUrl] = useState<string | null>(null);
 
-  const dispatch = useAppDispatch();
-
-  const { data, loading, selectedMinifig, minifigsToDisplay } =
+  const { selectedMinifig, minifigsToDisplay } =
     useAppSelector(selectMinifigSlice);
 
-  const handleNextScreen = () => {
-    navigation.navigate("DetailsForm");
-  };
+  const handleNextScreen = () => navigation.navigate("Details");
 
-  const handleSelectionChange = (item: minifigDataType) => {
+  const handleSelectionChange = (item: minifigDataType) =>
     dispatch(setSelectedMinifig(item));
-  };
 
   return (
     <HomeView
