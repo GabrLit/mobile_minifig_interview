@@ -1,21 +1,18 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
-import Home from "./src/screens/Home";
+import useFetchInitialData from "./src/hooks/useFetchInitialData";
+import useLoadStaticResources from "./src/hooks/useLoadStaticResources";
+import Navigation from "./src/navigation/Navigation";
 import { store } from "./src/store/store";
+import { containers } from "./src/styles";
 
 export default function App() {
-  return (
-    <Provider store={store}>
-      <Home />
-    </Provider>
-  );
-}
+  const areResourcesLoaded = useLoadStaticResources();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+  if (areResourcesLoaded)
+    return (
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    );
+}
