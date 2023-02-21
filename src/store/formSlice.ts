@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface initialStateTypes {
+export interface initialStateTypes {
   formValues: {
     name: string;
     email: string;
