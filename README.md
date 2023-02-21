@@ -1,3 +1,10 @@
+# App Preview:
+
+![firstScreen](https://user-images.githubusercontent.com/61962677/220335847-63fdb5d5-3954-4b40-a01c-4fc038bd6f39.png)
+![secondScreen](https://user-images.githubusercontent.com/61962677/220335945-409f3080-d96a-4727-ac50-3cca33d0e972.png)
+![thirdScreen](https://user-images.githubusercontent.com/61962677/220335965-8d0be4f0-98ec-4a2a-b149-2e8a3aeb0c48.png)
+
+
 # **IMPORTANT NOTES**
 
 This project uses external API service, and you will need a key to access it. To do so register on
@@ -40,4 +47,4 @@ $ npm run test
 
 7. After successfuly submitting the data, the fake API endpoint is called with POST method. In real life situation our backend would probably handle user authentication, so we would be able to send only authToken and id of the minifig user wants to get for free. We would also have to keep track of what minifigs user already has in his ownership, to disallow duplicate purchase. Form data is cleared and minifigs are randomly selected again from the initial pool.
 
-# App Preview:
+
