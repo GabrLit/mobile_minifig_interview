@@ -19,15 +19,17 @@ https://docs.expo.dev/workflow/android-studio-emulator/_**
 
 # Running the application on Android Emulator:
 
+note: --legacy-peer-deps has to be provided since testing packages are somehow incompatible, even though there are newest versions. I do not have much time to resolve these errors so just use --legacy-peer-deps.
+
 ```
-$ npm install
+$ npm install --legacy-peer-deps
 $ npm run android
 ```
 
 # Running test for the application:
 
 ```
-$ npm install
+$ npm install --legacy-peer-deps
 $ npm run test
 ```
 
