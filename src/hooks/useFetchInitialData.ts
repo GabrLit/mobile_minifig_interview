@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "../store/store";
-import {
-  getAllMinifigsByThemeId,
-  getMinifigPartsById,
-} from "../store/minifigsSlice";
+import { getAllMinifigsByThemeId } from "../store/minifigsSlice";
 
 import { THEMES } from "../types/enums";
 
@@ -12,7 +9,6 @@ const useFetchInitialData = () => {
 
   useEffect(() => {
     dispatch(getAllMinifigsByThemeId(THEMES.HARRY_POTTER));
-    dispatch(getMinifigPartsById("fig-012307"));
   }, []);
 };
 

@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { placeholders } from "../../placeholders";
-import MinifigFlatlist from "../../components/MinifigFlatlist";
 import { containers, fonts } from "../../styles";
 import { minifigDataType } from "../../types/minifigs";
-import WebViewModal from "../../components/WebViewModal";
 import CustomButton from "../../components/CustomButton";
+import WebViewModal from "../../components/Modals/WebViewModal";
+import MinifigFlatlist from "../../components/MinifigFlatlist/MinifigFlatlist";
 
 interface HomeViewProps {
   flatlistData: minifigDataType[];

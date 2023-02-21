@@ -4,6 +4,11 @@ import useFetchInitialData from "../hooks/useFetchInitialData";
 import Details from "../screens/Details/Details";
 import Home from "../screens/Home/Home";
 
+export type RootStackParamList = {
+  Home: undefined;
+  Details: undefined;
+};
+
 export default function Navigation() {
   useFetchInitialData();
   return (

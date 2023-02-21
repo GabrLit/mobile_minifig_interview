@@ -7,6 +7,7 @@ import { minifigDataType, minifigPartDataType } from "../types/minifigs";
 import { LOADING_STATUS, THEMES } from "../types/enums";
 import { HOW_MANY_MINIFIGS } from "../constant";
 import { getNumberOfRandomElements } from "../utils/getNumberOfRandomElements";
+import { RootState } from "./store";
 
 interface initialStateTypes {
   data: minifigDataType[];
@@ -29,9 +30,14 @@ export const getAllMinifigsByThemeId = createAsyncThunk(
   async (themeId: THEMES) => await fetchAllMinifigsByThemeId(themeId)
 );
 
-export const getMinifigPartsById = createAsyncThunk(
+export const getCurrentMinifigParts = createAsyncThunk(
   "minifigs/getMinifigPartsById",
-  async (minifigId: string) => await fetchMinifigPartsById(minifigId)
+  async (_, { getState }) => {
+    const currentState = getState() as RootState;
+    return await fetchMinifigPartsById(
+      currentState.minifigs.selectedMinifig.set_num
+    );
+  }
 );
 
 const minifigsSlice = createSlice({
@@ -41,9 +47,9 @@ const minifigsSlice = createSlice({
     setSelectedMinifig: (state, action) => {
       state.selectedMinifig = action.payload;
     },
-    setMinifigsToDisplay: (state, action) => {
+    setMinifigsToDisplay: (state) => {
       state.minifigsToDisplay = getNumberOfRandomElements(
-        action.payload,
+        state.data,
         HOW_MANY_MINIFIGS
       );
     },
@@ -55,16 +61,13 @@ const minifigsSlice = createSlice({
     builder.addCase(getAllMinifigsByThemeId.fulfilled, (state, action) => {
       state.data = action.payload;
       state.loading = LOADING_STATUS.SUCCEEDED;
-      minifigsSlice.caseReducers.setMinifigsToDisplay(state, {
-        payload: action.payload,
-        type: "",
-      });
+      minifigsSlice.caseReducers.setMinifigsToDisplay(state);
     });
     builder.addCase(getAllMinifigsByThemeId.rejected, (state, action) => {
       state.loading = LOADING_STATUS.FAILED;
       console.error(action.error.message);
     });
-    builder.addCase(getMinifigPartsById.fulfilled, (state, action) => {
+    builder.addCase(getCurrentMinifigParts.fulfilled, (state, action) => {
       state.selectedMinifigParts = action.payload;
     });
   },
@@ -72,5 +75,6 @@ const minifigsSlice = createSlice({
 
 export const selectMinifigSlice = ({ minifigs }) => minifigs;
 
-export const { setSelectedMinifig } = minifigsSlice.actions;
+export const { setSelectedMinifig, setMinifigsToDisplay } =
+  minifigsSlice.actions;
 export default minifigsSlice.reducer;

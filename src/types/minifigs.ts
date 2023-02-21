@@ -6,5 +6,10 @@ export interface minifigDataType {
 }
 
 export interface minifigPartDataType {
-  id: string;
+  id: number;
+  part: {
+    part_num: string;
+    name: string;
+    part_img_url: string;
+  };
 }

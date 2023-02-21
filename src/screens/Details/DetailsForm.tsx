@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, BackHandler } from "react-native";
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import CustomButton from "../../components/CustomButton";
@@ -6,11 +6,17 @@ import { placeholders } from "../../placeholders";
 import InputWithLabel from "../../components/InputWithLabel";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { preserveFormValues, selectFormSlice } from "../../store/formSlice";
-import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
 
-const DetailsForm = () => {
-  const navigation = useNavigation();
+interface DetailsFormProps {
+  summaryModalVisible: boolean;
+  openSummary: () => void;
+}
+
+const DetailsForm = ({
+  summaryModalVisible,
+  openSummary,
+}: DetailsFormProps) => {
   const dispatch = useAppDispatch();
   const { formValues } = useAppSelector(selectFormSlice);
 
@@ -20,7 +26,7 @@ const DetailsForm = () => {
       .email("Must be valid email")
       .required("Email is required"),
     address: Yup.string().required("Address is required"),
-    city: Yup.string().required("Address is required"),
+    city: Yup.string().required("City is required"),
     state: Yup.string()
       .required("State is required")
       .matches(/^[A-Z]{2}$/, "State must be a valid two-letter abbreviation"),
@@ -36,19 +42,28 @@ const DetailsForm = () => {
     initialValues: formValues,
     validationSchema,
     validateOnMount: true,
-    onSubmit: () => {},
+    onSubmit: () => {
+      openSummary();
+    },
   });
 
+  // overwrite default hardware back press and preserve form values
   useEffect(() => {
-    const unsubscribe = navigation.addListener("beforeRemove", (e) => {
-      e.preventDefault();
+    const backAction = () => {
       dispatch(preserveFormValues(formik.values));
-      navigation.dispatch(e.data.action);
-    });
-    return () => {
-      unsubscribe();
+      return false;
     };
-  }, [navigation, formik.values]);
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+    return () => backHandler.remove();
+  }, [formik.values]);
+
+  // must revalidate when closing modal
+  useEffect(() => {
+    formik.validateForm();
+  }, [summaryModalVisible]);
 
   return (
     <>

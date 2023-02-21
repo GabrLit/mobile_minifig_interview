@@ -7,8 +7,8 @@ import {
 } from "react-native";
 import React from "react";
 import MinifigCard from "./MinifigCard";
-import useDimensions from "../hooks/useDimensions";
-import { minifigDataType } from "../types/minifigs";
+import { minifigDataType } from "../../types/minifigs";
+import useDimensions from "../../hooks/useDimensions";
 
 interface MinifigFlatlistProps {
   style: ViewStyle;

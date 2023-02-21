@@ -8,4 +8,8 @@ export const placeholders = {
     showDetails: "Show Details",
   },
   detailsForm: { title: "PERSONAL DETAILS", button: "View Summary" },
+  summaryModal: {
+    title: "SUMMARY",
+    partCount: ["There are ", " parts in this minifig: "],
+  },
 };

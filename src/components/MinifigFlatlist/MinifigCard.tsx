@@ -7,9 +7,10 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import { minifigDataType } from "../types/minifigs";
-import { colors, fonts } from "../styles";
-import { placeholders } from "../placeholders";
+import { minifigDataType } from "../../types/minifigs";
+import { colors, fonts } from "../../styles";
+import { placeholders } from "../../placeholders";
+import { NO_IMG_PLACEHOLDER_URL } from "../../constant";
 
 interface MinifigCardProps {
   item: minifigDataType;
@@ -34,6 +35,7 @@ const MinifigCard = ({
 }: MinifigCardProps) => {
   return (
     <Pressable
+      testID={`minifig-${item.set_num}`}
       onPress={() => onPress(item)}
       style={[
         styles.wrapper,
@@ -47,9 +49,7 @@ const MinifigCard = ({
         <Image
           style={styles.image}
           source={{
-            uri:
-              item.set_img_url ||
-              "https://rebrickable.com/static/img/nil_mf.jpg",
+            uri: item.set_img_url || NO_IMG_PLACEHOLDER_URL,
           }}
         />
       </View>

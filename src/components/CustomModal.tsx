@@ -36,6 +36,7 @@ export default CustomModal;
 
 const styles = StyleSheet.create({
   modal: {
+    position: "relative",
     backgroundColor: colors.white,
     margin: 20,
     padding: 20,

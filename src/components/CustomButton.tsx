@@ -3,9 +3,9 @@ import React from "react";
 import { containers, fonts } from "../styles";
 
 interface CustomButtonProps {
-  disabled: boolean;
   text: string;
   onPress: () => void;
+  disabled?: boolean;
 }
 
 const CustomButton = ({ disabled, text, onPress }: CustomButtonProps) => {

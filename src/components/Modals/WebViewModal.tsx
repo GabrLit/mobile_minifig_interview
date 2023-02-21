@@ -1,6 +1,6 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import CustomModal from "./CustomModal";
+import CustomModal from "../CustomModal";
 import WebView from "react-native-webview";
 
 interface WebViewModalProps {
@@ -14,6 +14,7 @@ const WebViewModal = ({ url, onClose }: WebViewModalProps) => {
       {url && (
         <CustomModal visible={true} onClose={onClose}>
           <WebView
+            testID="web-view-modal"
             source={{ uri: url }}
             startInLoadingState={true}
             renderLoading={() => (
